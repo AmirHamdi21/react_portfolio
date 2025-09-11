@@ -22,9 +22,11 @@ export const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative mx-auto w-40 h-40 mb-8"
           >
-            <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center shadow-2xl">
-              <span className="text-4xl font-bold text-white">AM</span>
-            </div>
+            <img
+              src="/profile_picture.jpg"
+              alt="Amir Mohamed Hamdi El Sayed"
+              className="w-full h-full object-cover rounded-full shadow-2xl"
+            />
             <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
               <span className="text-white text-sm font-medium">👋</span>
             </div>
