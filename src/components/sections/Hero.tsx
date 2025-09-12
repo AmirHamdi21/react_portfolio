@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { MapPin, Download, Eye, Mail } from 'lucide-react';
+import profilePic from "../../assets/profile_picture.jpg";
 
 export const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -23,7 +24,7 @@ export const Hero = () => {
             className="relative mx-auto w-40 h-40 mb-8"
           >
             <img
-              src="/profile_picture.jpg"
+              src={profilePic}
               alt="Amir Mohamed Hamdi El Sayed"
               className="w-full h-full object-cover rounded-full shadow-2xl"
             />
@@ -49,7 +50,7 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary-600 dark:text-primary-400"
             >
-              Flutter Developer — Software Engineer
+              Flutter Developer – Software Engineer
             </motion.h2>
 
             <motion.p
