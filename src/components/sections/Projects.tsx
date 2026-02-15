@@ -1,41 +1,54 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { ProjectCard } from '../ui/ProjectCard';
-import { FolderOpen } from 'lucide-react';
+import { FolderOpen, Sparkles } from 'lucide-react';
+
+// GPAce App Images
+import gpace1 from '../../assets/GPAce images/GPAce 1.png';
+import gpace2 from '../../assets/GPAce images/GPAce 2.png';
+
+// Habit Tracking App Images
+import habit1 from '../../assets/Habit tracking images/Habit Tracking 1.png';
+import habit2 from '../../assets/Habit tracking images/Habit Tracking 2.png';
+import habit3 from '../../assets/Habit tracking images/Habit Tracking 3.png';
+import habit4 from '../../assets/Habit tracking images/Habit Tracking 4.png';
 
 const projects = [
   {
-    title: 'E-commerce App',
-    dateRange: 'Aug 2024 – Oct 2024',
-    description: 'A comprehensive e-commerce mobile application built with Flutter, featuring user authentication, product catalog, shopping cart, and secure payment integration. Optimized for both iOS and Android platforms.',
-    technologies: ['Flutter', 'Firebase', 'SQL'],
-    // TODO: Add actual project links and screenshots
-    githubUrl: '#', // Placeholder
-    liveUrl: '#', // Placeholder
+    title: 'GPAce',
+    dateRange: 'Jan 2025 – Present',
+    description: 'An intelligent GPA calculator and academic tracker designed to help students monitor their academic performance. Features intuitive grade input, semester-wise tracking, and predictive GPA calculations to help students achieve their academic goals.',
+    technologies: ['Flutter', 'Dart', 'Material Design', 'Local Storage'],
+    images: [gpace1, gpace2],
+    githubUrl: 'https://github.com/AmirHamdi21',
+    liveUrl: '#',
+    status: 'live' as const,
   },
   {
-    title: 'NoteFlow App',
-    dateRange: 'Sep 2024 – Nov 2024',
-    description: 'A powerful note-taking application with real-time synchronization, rich text editing, and offline support. Features advanced organization with tags, folders, and search functionality.',
-    technologies: ['Flutter', 'Firebase', 'SQL', 'Hive', 'GetX'],
-    // TODO: Add actual project links and screenshots
-    githubUrl: '#', // Placeholder
-    liveUrl: '#', // Placeholder
+    title: 'Habit Tracker',
+    dateRange: 'Dec 2024 – Present',
+    description: 'A comprehensive habit tracking application that helps users build and maintain positive habits. Features daily tracking, streak monitoring, progress analytics, and motivational reminders to keep users on track with their personal development goals.',
+    technologies: ['Flutter', 'Firebase', 'GetX', 'Charts', 'Notifications'],
+    images: [habit1, habit2, habit3, habit4],
+    githubUrl: 'https://github.com/AmirHamdi21',
+    liveUrl: '#',
+    status: 'live' as const,
   },
   {
-    title: 'Voho Chat App',
-    dateRange: 'Oct 2024 – Dec 2024',
-    description: 'A real-time chat application with group messaging, file sharing, and push notifications. Built with WebSocket integration for instant messaging and smooth user experience.',
-    technologies: ['Flutter', 'Firebase', 'SQL', 'WebSockets', 'GetX'],
-    // TODO: Add actual project links and screenshots
-    githubUrl: '#', // Placeholder
-    liveUrl: '#', // Placeholder
+    title: 'Coming Soon',
+    dateRange: 'TBD',
+    description: 'An exciting new project currently in the planning phase. Stay tuned for updates on this upcoming application that will showcase innovative features and cutting-edge mobile development techniques.',
+    technologies: ['Flutter', 'Firebase', 'More TBD'],
+    images: [],
+    githubUrl: '#',
+    liveUrl: '#',
+    status: 'coming-soon' as const,
   },
 ];
 
 export const Projects = () => {
   return (
-    <SectionWrapper id="projects" className="bg-white dark:bg-neutral-900">
+    <SectionWrapper id="projects" className="bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-900">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,27 +58,18 @@ export const Projects = () => {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <FolderOpen className="w-8 h-8 text-primary-600 dark:text-primary-400" />
+            <div className="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-xl">
+              <FolderOpen className="w-7 h-7 text-primary-600 dark:text-primary-400" />
+            </div>
             <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
               Featured Projects
             </h2>
+            <Sparkles className="w-5 h-5 text-yellow-500" />
           </div>
-          <div className="w-24 h-1 bg-primary-600 mx-auto rounded-full mb-4" />
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
-            Here are some of my recent projects that showcase my skills in mobile development and cross-platform app creation.
-          </p>
-        </motion.div>
-
-        {/* Developer Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg p-4 mb-12 text-center"
-        >
-          <p className="text-primary-700 dark:text-primary-300 text-sm">
-            <strong>Note:</strong> Project links, screenshots, and extended descriptions will be updated by Amir with actual project details.
+          <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto rounded-full mb-6" />
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            Explore my latest mobile applications showcasing expertise in Flutter development, 
+            clean architecture, and user-centric design principles.
           </p>
         </motion.div>
 
@@ -77,8 +81,10 @@ export const Projects = () => {
               dateRange={project.dateRange}
               description={project.description}
               technologies={project.technologies}
+              images={project.images}
               githubUrl={project.githubUrl}
               liveUrl={project.liveUrl}
+              status={project.status}
               index={index}
             />
           ))}
@@ -98,7 +104,7 @@ export const Projects = () => {
             href="https://github.com/AmirHamdi21"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-xl hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-medium shadow-lg shadow-primary-500/25"
           >
             View More on GitHub
           </motion.a>

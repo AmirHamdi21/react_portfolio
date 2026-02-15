@@ -1,44 +1,51 @@
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { CertificateCard } from '../ui/CertificateCard';
-import { Award, BookOpen, ExternalLink } from 'lucide-react';
+import { Award, BookOpen, ExternalLink, Calendar, CheckCircle } from 'lucide-react';
 
-// Placeholder certificates - Amir will update with actual Google Drive links
 const certificates = [
   {
     title: 'Mobile App Development',
     issuer: 'DEPI Internship',
     date: '16/5/2025',
-    credentialUrl: 'https://drive.google.com/file/d/1vLifxjxbDknzKo02ltHUAOFb9GzbFx2u/view?usp=drive_link', // TODO: Add Google Drive link
+    credentialUrl: 'https://drive.google.com/file/d/1vLifxjxbDknzKo02ltHUAOFb9GzbFx2u/view?usp=drive_link',
+    color: 'from-blue-500 to-indigo-500',
+    icon: '📱',
   },
   {
     title: 'Business English Track',
     issuer: 'Berlitz Egypt',
     date: '16/5/2025',
-    credentialUrl: 'https://drive.google.com/file/d/16o_pmpnxObutOYeeOH-MZygdhYL2hGsc/view?usp=sharing', // TODO: Add Google Drive link
+    credentialUrl: 'https://drive.google.com/file/d/16o_pmpnxObutOYeeOH-MZygdhYL2hGsc/view?usp=sharing',
+    color: 'from-emerald-500 to-teal-500',
+    icon: '🌐',
   },
   {
     title: 'Firebase Integration',
     issuer: 'Platform Name',
     date: 'Coming Soon',
-    credentialUrl: '', // TODO: Add Google Drive link
+    credentialUrl: '',
+    color: 'from-amber-500 to-orange-500',
+    icon: '🔥',
   },
 ];
 
-// Placeholder courses - Amir will update with actual course details
 const courses = [
-  'Advanced Flutter Development',
-  'Firebase for Mobile Apps',
-  'Android Development with Java/Kotlin',
-  'UI/UX Design Principles',
-  'State Management with Bloc',
-  'Database Design and Implementation',
+  { name: 'Advanced Flutter Development', icon: '💙', progress: 100 },
+  { name: 'Firebase for Mobile Apps', icon: '🔥', progress: 100 },
+  { name: 'Android Development with Java/Kotlin', icon: '🤖', progress: 85 },
+  { name: 'UI/UX Design Principles', icon: '🎨', progress: 90 },
+  { name: 'State Management with Bloc', icon: '🧩', progress: 100 },
+  { name: 'Database Design and Implementation', icon: '🗄️', progress: 95 },
 ];
 
 export const Certificates = () => {
   return (
-    <SectionWrapper id="certificates" className="bg-white dark:bg-neutral-900">
-      <div className="max-w-7xl mx-auto">
+    <SectionWrapper id="certificates" className="bg-white dark:bg-neutral-900 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+
+      <div className="max-w-7xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,38 +53,26 @@ export const Certificates = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Award className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
-              Certificates & Courses
-            </h2>
-          </div>
-          <div className="w-24 h-1 bg-primary-600 mx-auto rounded-full mb-4" />
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full text-sm font-medium mb-4"
+          >
+            <Award size={14} />
+            Achievements
+          </motion.span>
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4">
+            Certificates &{' '}
+            <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
+              Courses
+            </span>
+          </h2>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
-            Professional certifications and continuous learning journey in mobile development and software engineering.
+            Continuous learning journey in mobile development and software engineering
           </p>
         </motion.div>
 
-        {/* Developer Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg p-6 mb-12 text-center"
-        >
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-            <h3 className="text-lg font-semibold text-primary-700 dark:text-primary-300">
-              Certificate Links
-            </h3>
-          </div>
-          <p className="text-primary-700 dark:text-primary-300">
-            Amir will update this section with actual certificate Google Drive links and course details.
-          </p>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-10">
           {/* Certificates Section */}
           <div>
             <motion.div
@@ -85,28 +80,71 @@ export const Certificates = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-8"
+              className="flex items-center gap-3 mb-8"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <Award className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                  Certificates
-                </h3>
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
+                <Award className="w-6 h-6 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                Certificates
+              </h3>
             </motion.div>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               {certificates.map((certificate, index) => (
-                <CertificateCard
+                <motion.div
                   key={index}
-                  title={certificate.title}
-                  issuer={certificate.issuer}
-                  date={certificate.date}
-                  credentialUrl={certificate.credentialUrl}
-                  index={index}
-                />
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  onClick={() => certificate.credentialUrl && window.open(certificate.credentialUrl, '_blank', 'noopener,noreferrer')}
+                  className={`group relative bg-white dark:bg-neutral-800/80 rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700/50 overflow-hidden hover:shadow-xl transition-all duration-300 ${certificate.credentialUrl ? 'cursor-pointer' : 'cursor-default'}`}
+                >
+                  {/* Gradient Border */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${certificate.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+                  <div className={`h-1 bg-gradient-to-r ${certificate.color}`} />
+
+                  <div className="p-6">
+                    <div className="flex items-start gap-4">
+                      <motion.div
+                        whileHover={{ rotate: 10, scale: 1.1 }}
+                        className={`w-14 h-14 bg-gradient-to-br ${certificate.color} rounded-2xl flex items-center justify-center shadow-lg text-2xl`}
+                      >
+                        {certificate.icon}
+                      </motion.div>
+
+                      <div className="flex-1">
+                        <h4 className="text-lg font-bold text-neutral-900 dark:text-white mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          {certificate.title}
+                        </h4>
+                        <p className="text-neutral-600 dark:text-neutral-400 mb-2">
+                          {certificate.issuer}
+                        </p>
+                        <div className="flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-500">
+                          <Calendar size={14} />
+                          <span>{certificate.date}</span>
+                        </div>
+                      </div>
+
+                      {certificate.credentialUrl ? (
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={(e) => e.stopPropagation()}
+                          className={`p-3 bg-gradient-to-br ${certificate.color} rounded-xl text-white shadow-lg hover:shadow-xl transition-all`}
+                        >
+                          <ExternalLink size={18} />
+                        </motion.div>
+                      ) : (
+                        <div className="p-3 bg-neutral-200 dark:bg-neutral-700 rounded-xl text-neutral-400 dark:text-neutral-500">
+                          <ExternalLink size={18} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -118,50 +156,68 @@ export const Certificates = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="flex items-center gap-3 mb-8"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                  Courses & Training
-                </h3>
+              <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <BookOpen className="w-6 h-6 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-neutral-900 dark:text-white">
+                Courses & Training
+              </h3>
             </motion.div>
 
-            <div className="space-y-4">
-              {courses.map((course, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:shadow-md hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-primary-600 rounded-full" />
-                    <span className="text-neutral-700 dark:text-neutral-300 font-medium">
-                      {course}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+            <div className="bg-white dark:bg-neutral-800/50 rounded-3xl p-6 shadow-xl border border-neutral-200 dark:border-neutral-700/50">
+              <div className="space-y-4">
+                {courses.map((course, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    whileHover={{ x: 5 }}
+                    className="group flex items-center gap-4 p-4 bg-neutral-50 dark:bg-neutral-700/30 rounded-xl border border-transparent hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+                  >
+                    <span className="text-2xl">{course.icon}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-neutral-800 dark:text-neutral-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          {course.name}
+                        </span>
+                        <span className="text-sm font-semibold text-primary-600 dark:text-primary-400">
+                          {course.progress}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-neutral-200 dark:bg-neutral-600 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${course.progress}%` }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 1, delay: index * 0.1 }}
+                          className="h-full bg-gradient-to-r from-primary-500 to-purple-500 rounded-full"
+                        />
+                      </div>
+                    </div>
+                    {course.progress === 100 && (
+                      <CheckCircle size={20} className="text-emerald-500" />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Additional Info */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="mt-6 p-4 bg-gradient-to-r from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-xl border border-primary-100 dark:border-primary-800/30"
+              >
+                <p className="text-center text-neutral-600 dark:text-neutral-400 text-sm">
+                  🎯 Continuous learning through online platforms, workshops, and hands-on projects
+                </p>
+              </motion.div>
             </div>
-
-            {/* Additional Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 p-4 bg-neutral-200 dark:bg-neutral-800 rounded-lg text-center"
-            >
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                Continuous learning through online platforms, workshops, and hands-on projects
-              </p>
-            </motion.div>
           </div>
         </div>
       </div>
