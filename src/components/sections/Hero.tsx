@@ -111,7 +111,7 @@ export const Hero = () => {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://drive.google.com/file/d/13FKRMhMUIdmcIaRKRZUZVdISL16LV3vX/view?usp=sharing"
+              href="https://drive.google.com/file/d/1edlaqtzN08V0Yd3EGsA7TGLVXmYBx5Pr/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-300 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-all duration-300 font-medium"
