@@ -1,6 +1,7 @@
 import { SectionWrapper } from '../ui/SectionWrapper';
 import { PanelHead } from '../ui/PanelHead';
 import { SectionFade } from '../ui/SectionFade';
+import { ExternalLinkIcon } from '../ui/ExternalLinkIcon';
 
 interface Certificate {
   title: string;
@@ -52,7 +53,9 @@ export const Certificates = () => {
                 </span>
               </span>
               <span className="font-mono text-[12px] text-ink-faint group-hover:text-amber transition-colors duration-200 shrink-0">
-                view ↗
+                <span className="inline-flex items-center gap-1.5">
+                  view <ExternalLinkIcon className="h-3 w-3" />
+                </span>
               </span>
             </a>
           </SectionFade>

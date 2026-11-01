@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ExternalLinkIcon } from './ExternalLinkIcon';
 
 interface ProjectCardProps {
   title: string;
@@ -83,7 +84,7 @@ export const ProjectCard = ({
           <div className="flex flex-wrap gap-2.5 mt-auto">
             {githubUrl && (
               <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ghost !text-[12.5px] !px-4 !py-2">
-                github ↗
+                github <ExternalLinkIcon className="h-3 w-3" />
               </a>
             )}
             {liveUrl && (
