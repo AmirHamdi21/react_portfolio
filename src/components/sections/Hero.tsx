@@ -1,6 +1,7 @@
 import { MapPin } from 'lucide-react';
 import { SectionFade } from '../ui/SectionFade';
 import profilePic from '../../assets/profile_picture.jpg';
+import cvPdf from '../../assets/Amir_Hamdi_Flutter_Developer_CV.pdf';
 
 export const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -85,9 +86,8 @@ export const Hero = () => {
               view projects →
             </button>
             <a
-              href="https://drive.google.com/file/d/1edlaqtzN08V0Yd3EGsA7TGLVXmYBx5Pr/view?usp=drive_link"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={cvPdf}
+              download="Amir_Hamdi_Flutter_Developer_CV.pdf"
               className="btn btn-ghost"
             >
               download CV ↓
