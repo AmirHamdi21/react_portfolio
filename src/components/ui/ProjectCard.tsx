@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Calendar } from 'lucide-react';
 
 interface ProjectCardProps {
   title: string;
@@ -9,9 +8,16 @@ interface ProjectCardProps {
   imageUrl?: string;
   githubUrl?: string;
   liveUrl?: string;
+  liveLabel?: string;
+  badge?: string;
+  featured?: boolean;
   index: number;
 }
 
+/**
+ * Device-window project card (MASTER.md §7): panel-2 title bar with window
+ * dots, mono title, right-aligned real date range, real content only.
+ */
 export const ProjectCard = ({
   title,
   dateRange,
@@ -20,87 +26,74 @@ export const ProjectCard = ({
   imageUrl,
   githubUrl,
   liveUrl,
+  liveLabel = 'Live Demo',
+  badge,
+  featured = false,
   index,
 }: ProjectCardProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ y: -5 }}
-      className="bg-neutral-50 dark:bg-neutral-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-neutral-300 dark:border-neutral-700"
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.06, 0.18), ease: 'easeOut' }}
+      className="bg-panel border border-edge rounded-md overflow-hidden hover:border-edge-hi transition-colors duration-300 h-full flex flex-col"
     >
-      {/* Project Image Placeholder */}
-      <div className="h-48 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 flex items-center justify-center">
-        {imageUrl ? (
-          <img src={imageUrl} alt={title} className="w-full h-full object-cover" />
-        ) : (
-          <div className="text-center">
-            <div className="w-16 h-16 bg-primary-600 rounded-lg mx-auto mb-2 flex items-center justify-center">
-              <span className="text-white font-bold text-xl">
-                {title.charAt(0)}
-              </span>
-            </div>
-            <span className="text-primary-700 dark:text-primary-300 text-sm font-medium">
-              Project Image Placeholder
-            </span>
-          </div>
-        )}
+      {/* Title bar */}
+      <div className="bg-panel-2 border-b border-edge px-4 py-2.5 font-mono text-[12px] text-ink-dim flex items-center gap-3">
+        <span className="flex gap-1.5" aria-hidden="true">
+          <i className="w-[9px] h-[9px] rounded-full bg-amber" />
+          <i className="w-[9px] h-[9px] rounded-full bg-edge-hi" />
+          <i className="w-[9px] h-[9px] rounded-full bg-edge-hi" />
+        </span>
+        <span className="truncate">{title.toLowerCase()}</span>
+        <span className="ml-auto text-ink-faint tabular shrink-0">{dateRange}</span>
       </div>
 
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-2">
-          <Calendar size={16} className="text-neutral-500" />
-          <span className="text-sm text-neutral-500 dark:text-neutral-400">{dateRange}</span>
+      {/* Optional visual */}
+      {imageUrl && (
+        <div className="border-b border-edge bg-field">
+          <img
+            src={imageUrl}
+            alt={`${title} preview`}
+            className="w-full max-h-56 object-cover"
+          />
         </div>
+      )}
 
-        <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-3">
+      {/* Body */}
+      <div className={`p-6 flex flex-col flex-1 ${featured ? 'lg:p-7' : ''}`}>
+        {badge && (
+          <span className="chip border-amber text-amber self-start mb-3">{badge}</span>
+        )}
+        <h3 className={`${featured ? 'text-2xl' : 'text-lg'} font-semibold tracking-tight text-ink`}>
           {title}
         </h3>
-
-        <p className="text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed">
+        <p className={`mt-2 text-ink-dim ${featured ? 'text-[14.5px]' : 'text-[13px]'} leading-relaxed`}>
           {description}
         </p>
 
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {technologies.map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              className="px-3 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full"
-            >
-              {tech}
-            </span>
+        <div className="flex flex-wrap gap-2 my-5">
+          {technologies.map((tech) => (
+            <span key={tech} className="chip">{tech.toLowerCase()}</span>
           ))}
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href={githubUrl || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-300 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors duration-200 text-sm font-medium"
-          >
-            <Github size={16} />
-            GitHub
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            href={liveUrl || "#"}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
-          >
-            <ExternalLink size={16} />
-            Live Demo
-          </motion.a>
-        </div>
+        {(githubUrl || liveUrl) && (
+          <div className="flex flex-wrap gap-2.5 mt-auto">
+            {githubUrl && (
+              <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ghost !text-[12.5px] !px-4 !py-2">
+                github ↗
+              </a>
+            )}
+            {liveUrl && (
+              <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !text-[12.5px] !px-4 !py-2">
+                {liveLabel.toLowerCase()} ↓
+              </a>
+            )}
+          </div>
+        )}
       </div>
-    </motion.div>
+    </motion.article>
   );
 };

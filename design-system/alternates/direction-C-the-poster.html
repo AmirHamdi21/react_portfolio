@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>C — The Poster · Bauhaus Constructivism</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+  :root{
+    --bg:#EDEFEA; --ink:#131313; --panel:#F5F5F1;
+    --red:#E62D2D; --blue:#103FC0; --mustard:#F0B905;
+    --hard:4px 4px 0 0 var(--ink); --hard-big:8px 8px 0 0 var(--ink);
+  }
+  [data-theme="dark"]{
+    --bg:#131313; --ink:#F0EFEB; --panel:#1B1B1B;
+    --red:#FF5252; --blue:#4A70FF; --mustard:#F0C52E;
+    --hard:4px 4px 0 0 var(--ink); --hard-big:8px 8px 0 0 var(--ink);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Outfit',sans-serif;line-height:1.6;
+    transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;
+  }
+  .mono,.tag{font-family:'Space Mono',monospace}
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .wrap{max-width:1300px;margin:0 auto;padding:0 clamp(18px,3.5vw,44px)}
+
+  /* mechanical press = signature interaction */
+  .press{transition:transform .12s ease,box-shadow .12s ease;cursor:pointer}
+  .press:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 var(--ink)}
+  .press:active{transform:translate(4px,4px);box-shadow:0 0 0 0 var(--ink)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:3px solid var(--ink);transition:background .3s}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .mark{font-weight:900;font-size:22px;letter-spacing:-.03em;text-transform:uppercase}
+  .mark b{color:var(--red)}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{font-family:'Space Mono',monospace;font-size:12.5px;text-transform:lowercase;text-decoration:none;
+               padding:7px 14px;border:2px solid var(--ink);border-radius:9999px;background:var(--bg);transition:all .12s}
+  .nav-links a:hover{background:var(--ink);color:var(--bg);transform:translate(-2px,-2px);box-shadow:3px 3px 0 0 var(--red)}
+  .theme-btn{font-family:'Space Mono',monospace;font-size:12.5px;padding:7px 14px;border:2px solid var(--ink);
+             border-radius:9999px;background:var(--mustard);color:#131313;cursor:pointer;font-weight:700}
+  @media(max-width:960px){.nav-links a.opt{display:none}}
+
+  /* ---------- hero : locked poster grid ---------- */
+  header{border-bottom:3px solid var(--ink)}
+  .poster{display:grid;grid-template-columns:1.35fr 1fr;border-left:3px solid var(--ink)}
+  .poster-main{padding:clamp(48px,8vh,100px) clamp(24px,4vw,60px) clamp(40px,6vh,72px)}
+  .poster-main .n{font-family:'Space Mono',monospace;font-size:13px;margin-bottom:26px;color:var(--ink)}
+  .poster-main .n b{background:var(--red);color:#fff;padding:3px 10px;font-weight:400}
+  h1{font-weight:900;text-transform:uppercase;letter-spacing:-.04em;line-height:.94;
+     font-size:clamp(2.8rem,7.2vw,6.4rem);text-wrap:balance}
+  h1 .out{color:var(--blue)}
+  .poster-main p{max-width:44ch;font-size:clamp(15px,1.4vw,18px);font-weight:500;margin:28px 0 34px;color:var(--ink);opacity:.85}
+  .poster-main p b{opacity:1}
+  .btn-bar{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{font-weight:700;font-size:15px;padding:15px 30px;border:3px solid var(--ink);border-radius:9999px;
+       text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  .btn-red{background:var(--red);color:#fff;box-shadow:var(--hard)}
+  .btn-red:hover{background:var(--ink);color:var(--bg)}
+  .btn-ghost{background:var(--bg);box-shadow:var(--hard)}
+  .btn-ghost:hover{background:var(--mustard);color:#131313}
+
+  .poster-side{border-left:3px solid var(--ink);display:grid;chars:3}
+  .cell{padding:26px 30px;border-bottom:3px solid var(--ink)}
+  .cell:last-child{border-bottom:none}
+  .cell .k{font-family:'Space Mono',monospace;font-size:11px;color:var(--ink);opacity:.6;margin-bottom:6px}
+  .cell .v{font-weight:700;font-size:19px;letter-spacing:-.01em}
+  .cell-red{background:var(--red);color:#fff}
+  .cell-red .k{opacity:.8}
+  .cell-blue{background:var(--blue);color:#fff}
+  .cell-blue .k{opacity:.8}
+  .cell-must{background:var(--mustard);color:#131313}
+  .cell .v small{font-weight:500;opacity:.75;font-size:13px}
+
+  /* ---------- poster section headers ---------- */
+  .shead{display:flex;align-items:center;gap:20px;margin-bottom:38px}
+  .shead .n{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;padding:8px 16px;border:3px solid var(--ink);border-radius:0;box-shadow:var(--hard)}
+  .shead h2{font-weight:900;font-size:clamp(1.7rem,3.4vw,2.7rem);text-transform:uppercase;letter-spacing:-.02em}
+  .shead .line{flex:1;height:3px;background:var(--ink);min-width:30px}
+
+  /* ---------- skills color-block matrix ---------- */
+  .section{padding:clamp(48px,8vh,90px) 0}
+  .skillblock{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:3px solid var(--ink);border-left:none;border-bottom:none}
+  .sb{padding:24px;border-left:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--panel)}
+  .sb .k{font-family:'Space Mono',monospace;font-size:11px;margin-bottom:10px;opacity:.65}
+  .sb ul{list-style:none}
+  .sb li{font-weight:600;font-size:15.5px;padding:5px 0;border-top:1px dashed var(--ink);opacity:.9}
+  .sb li:first-child{border-top:none}
+  .sb.accent-red{background:var(--red);color:#fff}.sb.accent-red li{border-color:#fff;opacity:1}
+  .sb.accent-blue{background:var(--blue);color:#fff}.sb.accent-blue li{border-color:#fff;opacity:1}
+  .sb.accent-must{background:var(--mustard);color:#131313}.sb.accent-must li{border-color:#131313;opacity:1}
+
+  /* ---------- projects : hard-shadow cards ---------- */
+  .sidecode{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px}
+  .pcard{background:var(--panel);border:3px solid var(--ink);padding:26px;display:flex;flex-direction:column;gap:12px}
+  .pcard:hover{box-shadow:6px 6px 0 0 var(--blue)}
+  .pcard.red:hover{box-shadow:6px 6px 0 0 var(--red)}
+  .pcard.must:hover{box-shadow:6px 6px 0 0 var(--mustard)}
+  .pcard .tag{font-size:11px}
+  .pcard h3{font-weight:900;font-size:24px;text-transform:uppercase;letter-spacing:-.02em}
+  .pcard p{font-size:14px;opacity:.85;flex:1}
+  .pcard a{font-family:'Space Mono',monospace;font-size:13px;text-decoration:none;font-weight:700;
+           border:2px solid var(--ink);border-radius:9999px;padding:8px 18px;align-self:flex-start;background:var(--bg)}
+  .pcard a:hover{background:var(--ink);color:var(--bg)}
+
+  .feature-card{border:3px solid var(--ink);background:var(--panel);display:grid;grid-template-columns:5fr 6fr;box-shadow:var(--hard-big)}
+  .f-visual{background:var(--blue);border-right:3px solid var(--ink);display:flex;align-items:center;justify-content:center;min-height:300px}
+  .f-visual .big{font-weight:900;font-size:clamp(2.4rem,5vw,4rem);color:#fff;text-transform:uppercase;letter-spacing:-.03em;text-align:center;line-height:1}
+  .f-visual .big span{color:var(--mustard)}
+  .f-copy{padding:clamp(24px,3vw,40px)}
+  .f-copy .tag{font-size:12px}
+  .f-copy h3{font-weight:900;font-size:clamp(1.9rem,3.4vw,2.8rem);text-transform:uppercase;letter-spacing:-.03em;margin:8px 0 14px}
+  .f-copy p{font-size:15px;opacity:.9}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 24px}
+  .chips span{font-family:'Space Mono',monospace;font-size:11px;padding:5px 12px;border:2px solid var(--ink);border-radius:9999px}
+  .f-links{display:flex;gap:12px;flex-wrap:wrap}
+  .f-links a{font-weight:700;font-size:13.5px;padding:10px 22px;border:3px solid var(--ink);border-radius:9999px;text-decoration:none}
+  .f-links a.solid{background:var(--ink);color:var(--bg)}
+  .f-links a.solid:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .f-links a.line:hover{background:var(--mustard);color:#131313;border-color:var(--ink)}
+
+  /* ---------- experience : rotated markers timeline ---------- */
+  .timeline{position:relative;padding-left:0}
+  .trow{display:grid;grid-template-columns:120px 1fr;gap:26px;padding:26px 0;border-bottom:2px dashed var(--ink)}
+  .trow:last-child{border-bottom:none}
+  .twhen{font-family:'Space Mono',monospace;font-size:12.5px;font-weight:700;padding-top:8px}
+  .twhat .t{font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:-.01em}
+  .twhat .c{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--red);font-weight:700;margin:4px 0 10px}
+  .twhat p{font-size:14px;opacity:.85;max-width:70ch}
+
+  /* ---------- contact ---------- */
+  .contact{border-top:3px solid var(--ink)}
+  .contact-inner{padding:clamp(48px,8vh,90px) 0}
+  .contact-inner h2{font-weight:900;font-size:clamp(2rem,5vw,4rem);text-transform:uppercase;letter-spacing:-.03em;max-width:20ch;text-wrap:balance}
+  .contact-inner h2 .u-must{background:var(--mustard);color:#131313;padding:0 10px;display:inline-block;transform:rotate(-1deg)}
+  .contact-bar{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .contact-bar .btn{box-shadow:var(--hard)}
+  .contact-bar .btn:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 0 var(--ink)}
+
+  .foot{border-top:3px solid var(--ink);padding:24px 0 40px;font-family:'Space Mono',monospace;font-size:12px;
+        display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--ink);color:var(--bg)}
+  [data-theme="dark"] .foot{background:var(--ink);color:var(--bg)}
+
+  @media (max-width:960px){
+    .poster{grid-template-columns:1fr}
+    .poster-side{border-left:none;border-top:3px solid var(--ink);grid-template-columns:repeat(3,1fr)}
+    .skillblock{grid-template-columns:repeat(2,1fr)}
+    .sidecode{grid-template-columns:1fr}
+    .feature-card{grid-template-columns:1fr}
+    .f-visual{border-right:none;border-bottom:3px solid var(--ink);min-height:180px}
+    .trow{grid-template-columns:1fr;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav">
+    <span class="mark">Amir<b>*</b>Works</span>
+    <div class="nav-links">
+      <a href="#skills">skills</a><a class="opt" href="#projects">projects</a><a class="opt" href="#experience">experience</a>
+      <a href="mailto:amirhamdi2112@gmail.com">contact</a>
+      <button class="theme-btn press" onclick="toggleTheme()">◐ mode</button>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="poster">
+    <div class="poster-main">
+      <p class="n num"><b>FLUTTER DEV</b> &nbsp;·&nbsp; SOFTWARE ENGINEER &nbsp;·&nbsp; ALEXANDRIA, EG</p>
+      <h1>Amir Mohamed Hamdi <span class="out">El Sayed</span></h1>
+      <p>Passionate about mobile, driven by innovation. I design, build and ship <b>cross-platform apps with Dart, Flutter, Firebase and BLoC/Cubit</b> — reliable, well-structured features from day one.</p>
+      <div class="btn-bar">
+        <a class="btn btn-red press" href="#projects">View projects →</a>
+        <a class="btn btn-ghost press" href="https://drive.google.com/file/d/1edlaqtzN08V0Yd3EGsA7TGLVXmYBx5Pr/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Download CV ↓</a>
+      </div>
+    </div>
+    <aside class="poster-side">
+      <div class="cell cell-red"><p class="k">field record</p><p class="v num">6 mo internship <small>· 3 apps shipped</small></p></div>
+      <div class="cell cell-blue"><p class="k">calibration</p><p class="v num">CGPA 3.65 / 4.00 <small>· Excellent</small></p></div>
+      <div class="cell cell-must"><p class="k">certified</p><p class="v num">2× DEPI <small>· mobile dev + English</small></p></div>
+      <div class="cell"><p class="k">education</p><p class="v">B.Sc. Comm. &amp; Electronics <small>· Alexandria University ’26</small></p></div>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section class="wrap section" id="skills">
+    <div class="shead"><span class="n">01</span><h2>Craft matrix</h2><div class="line"></div></div>
+    <div class="skillblock">
+      <div class="sb accent-red">
+        <p class="k">daily drivers</p>
+        <ul><li>Flutter</li><li>Dart</li><li>BLoC / Cubit</li><li>GetX</li></ul>
+      </div>
+      <div class="sb">
+        <p class="k">data &amp; storage</p>
+        <ul><li>Firebase</li><li>MySQL</li><li>Sqflite / Hive</li><li>Supabase</li></ul>
+      </div>
+      <div class="sb accent-blue">
+        <p class="k">backend &amp; api</p>
+        <ul><li>NestJS</li><li>REST APIs</li><li>WebSockets</li><li>PHP</li></ul>
+      </div>
+      <div class="sb">
+        <p class="k">adjacent systems</p>
+        <ul><li>Android Java/Kotlin</li><li>Python · Java · C</li><li>Assembly</li></ul>
+        <div class="sb accent-must" style="margin:14px -24px -24px;padding:16px 24px;border-left:none;border-right:none;border-top:3px solid var(--ink);background:var(--mustard);color:#131313">
+          <p class="k" style="opacity:.7;margin-bottom:6px">method</p>
+          <p style="font-weight:700;font-size:13.5px">Git &amp; GitHub · OOP · push (FCM) · Linux</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="projects">
+    <div class="shead"><span class="n" style="background:var(--red);color:#fff;border-color:var(--ink)">02</span><h2>Selected work</h2><div class="line"></div></div>
+
+    <article class="feature-card press" style="cursor:default">
+      <div class="f-visual"><span class="big">Edu<span>Vers</span>e</span></div>
+      <div class="f-copy">
+        <p class="tag num">GRADUATION PROJECT · rated Excellent · Sep 2025 → Jul 2026</p>
+        <h3>EduVerse</h3>
+        <p>AI-powered educational management platform in Flutter with a NestJS + MySQL backend. Three user roles — students, instructors, teaching assistants. Course management, grades, attendance, quizzes; REST endpoints integrated from the backend; role-based access and authentication; AI feature included.</p>
+        <div class="chips"><span>Flutter</span><span>Dart</span><span>BLoC</span><span>NestJS</span><span>MySQL</span><span>REST</span><span>WebSockets</span><span>Dio</span></div>
+        <div class="f-links">
+          <a class="solid press" href="https://github.com/AmirHamdi21/EduVerse" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="line press" href="https://github.com/AmirHamdi21/EduVerse/releases/download/v1.0.0/app-release.apk" target="_blank" rel="noopener noreferrer">Download APK ↓</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="sidecode" style="margin-top:18px">
+      <article class="pcard red">
+        <p class="tag num">MAR 2025 – MAY 2025</p>
+        <h3>Fitlytic</h3>
+        <p>Fitness app with workout &amp; calorie tracking — Firebase Auth + Firestore, Cubit managing flows, FCM reminders.</p>
+        <a class="press" href="https://github.com/AmirHamdi21/Fitlytic_App" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </article>
+      <article class="pcard">
+        <p class="tag num">SEP 2024 – OCT 2024</p>
+        <h3>GPAce</h3>
+        <p>GPA calculator for academic data management — input validation and local storage.</p>
+        <a class="press" href="https://github.com/AmirHamdi21/GPAce" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </article>
+      <article class="pcard must">
+        <p class="tag num">SEP 2025</p>
+        <h3>My Trip</h3>
+        <p>React frontend for a smart airline booking system — passengers, admins, crew; role-based auth.</p>
+        <a class="press" href="https://github.com/AmirHamdi21/new_trip" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="experience">
+    <div class="shead"><span class="n" style="background:var(--blue);color:#fff">03</span><h2>Field experience</h2><div class="line"></div></div>
+    <div class="timeline">
+      <div class="trow">
+        <span class="twhen num">NOV 2024 →<br>MAY 2025</span>
+        <div class="twhat">
+          <p class="t">Mobile Development Intern</p>
+          <p class="c">DEPI — Ministry of Communications &amp; IT · remote</p>
+          <p>6-month intensive mobile track. Built <b>Fitlytic</b> (Flutter, BLoC/Cubit, Firebase + MySQL/PHP REST API), integrated FCM push notifications, shipped in a team of 5 using Git/GitHub.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <span class="twhen num">2023 → 2024</span>
+        <div class="twhat">
+          <p class="t">Software Engineer Intern</p>
+          <p class="c" style="color:var(--blue)">ALX · remote</p>
+          <p>Intensive full-stack program — version control, testing, deployment, collaborative and peer programming projects.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <span class="twhen num">2025</span>
+        <div class="twhat">
+          <p class="t">Certificates</p>
+          <p class="c" style="color:var(--mustard)">DEPI · verified</p>
+          <p>Mobile App Developer — Certificate of Achievement · Business English Track (Round 2) — Certificate of Completion. Both viewable via credential links.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap contact-inner">
+      <h2>Hiring? Building? <span class="u-must">Talk to me.</span></h2>
+      <div class="contact-bar">
+        <a class="btn btn-red press" href="mailto:amirhamdi2112@gmail.com">Email me →</a>
+        <a class="btn btn-ghost press" href="https://www.linkedin.com/in/amir-mohamed-hamdi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn-ghost press" href="https://github.com/AmirHamdi21" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© 2026 AMIR MOHAMED HAMDI EL SAYED · ALEXANDRIA, EGYPT</span>
+  <span>amirhamdi2112@gmail.com · +20 103 082 5155</span>
+</footer>
+
+<script>
+  function toggleTheme(){
+    const el=document.documentElement;
+    el.dataset.theme = el.dataset.theme==='light' ? 'dark' : 'light';
+  }
+</script>
+</body>
+</html>

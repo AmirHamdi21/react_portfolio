@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { MapPin, Download, Eye, Mail } from 'lucide-react';
-import profilePic from "../../assets/profile_picture.jpg";
+import { MapPin } from 'lucide-react';
+import { SectionFade } from '../ui/SectionFade';
+import profilePic from '../../assets/profile_picture.jpg';
 
 export const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -8,119 +8,96 @@ export const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          {/* Profile Avatar */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative mx-auto w-40 h-40 mb-8"
-          >
-            <img
-              src={profilePic}
-              alt="Amir Mohamed Hamdi El Sayed"
-              className="w-full h-full object-cover rounded-full shadow-2xl"
+    <section className="max-w-site mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-14">
+      <div className="space-y-7 sm:space-y-9">
+        {/* Boot line — the one orchestrated moment (MASTER.md §6) */}
+        <SectionFade>
+          <p className="font-mono text-[12.5px] text-ink-faint flex items-center gap-2">
+            <span
+              aria-hidden="true"
+              className="w-1.5 h-1.5 rounded-full bg-ok"
             />
-            <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white text-sm font-medium">👋</span>
-            </div>
-          </motion.div>
+            <span>
+              $ whoami → <b className="text-ink font-medium">ready</b> · Flutter developer &amp; software engineer
+            </span>
+          </p>
+        </SectionFade>
 
-          {/* Main Content */}
-          <div className="space-y-6">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-neutral-900 dark:text-white leading-tight"
-            >
-              Amir Mohamed Hamdi El Sayed
-            </motion.h1>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl sm:text-2xl lg:text-3xl font-medium text-primary-600 dark:text-primary-400"
-            >
-              Flutter Developer – Software Engineer
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-xl text-neutral-700 dark:text-neutral-300 max-w-3xl mx-auto leading-relaxed"
-            >
-              "Passionate About Mobile, Driven by Innovation"
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex items-center justify-center gap-2 text-neutral-600 dark:text-neutral-400"
-            >
-              <MapPin size={20} />
-              <span className="text-lg">Alexandria, Egypt</span>
-            </motion.div>
+        {/* Headline + operator ID plate — the plate sits at the other end of the
+            headline and stretches to its height on ALL sizes (mobile: narrow
+            portrait, no caption — it can't fit honestly at that width).
+            Master contract: square-ish, 1px edge frame, grayscale, mono caption
+            (≥sm), no circle avatar. */}
+        <SectionFade delay={0.06}>
+          <div className="flex items-stretch justify-between gap-5 sm:gap-10">
+            <h1 className="flex-1 min-w-0 max-w-[18ch] text-[clamp(1.9rem,5.4vw,4.2rem)] font-semibold leading-[1.08] tracking-[-0.025em] text-balance">
+              Amir Mohamed Hamdi El Sayed — <span className="text-amber">Flutter Developer</span>
+            </h1>
+            <aside className="shrink-0 w-20 sm:w-32 lg:w-[9.5rem] flex flex-col">
+              <div className="relative flex-1 min-h-0 overflow-hidden rounded border border-edge">
+                <img
+                  src={profilePic}
+                  alt="Portrait of Amir Mohamed Hamdi El Sayed"
+                  className="absolute inset-0 w-full h-full object-cover object-top grayscale contrast-105"
+                />
+              </div>
+              <span
+                aria-hidden="true"
+                className="hidden sm:block font-mono text-[10px] text-ink-faint text-center mt-1.5 truncate"
+              >
+                operator · amir-hamdi
+              </span>
+            </aside>
           </div>
+        </SectionFade>
 
-          {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+        <SectionFade delay={0.12}>
+          <dl className="flex flex-wrap gap-x-12 gap-y-6">
+            <div>
+              <dt className="font-mono text-[11px] text-ink-faint mb-1.5">education</dt>
+              <dd className="text-[15px] text-ink">
+                B.Sc. Communication &amp; Electronics Eng.{' '}
+                <span className="text-ink-dim">· Alexandria University ’26</span>
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] text-ink-faint mb-1.5">field record</dt>
+              <dd className="text-[15px] text-ink tabular">
+                6 mo internship · 3 shipped apps · 2 certs
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] text-ink-faint mb-1.5">calibration</dt>
+              <dd className="text-[15px] text-ink">
+                CGPA <span className="tabular">3.65 / 4.00</span>{' '}
+                <span className="text-ink-dim">· Excellent</span>
+              </dd>
+            </div>
+          </dl>
+        </SectionFade>
+
+        <SectionFade delay={0.18}>
+          <div className="flex flex-wrap gap-3">
+            <button
               onClick={() => scrollToSection('projects')}
-              className="flex items-center gap-2 px-8 py-4 bg-primary-600 text-white rounded-lg shadow-lg hover:bg-primary-700 hover:shadow-xl transition-all duration-300 font-medium text-lg"
+              className="btn btn-primary"
             >
-              <Eye size={20} />
-              View Projects
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('contact')}
-              className="flex items-center gap-2 px-8 py-4 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border-2 border-neutral-300 dark:border-neutral-600 rounded-lg shadow-lg hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 font-medium text-lg"
-            >
-              <Mail size={20} />
-              Contact Me
-            </motion.button>
-          </motion.div>
-
-          {/* Download CV Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="pt-4"
-          >
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              view projects →
+            </button>
+            <a
               href="https://drive.google.com/file/d/1edlaqtzN08V0Yd3EGsA7TGLVXmYBx5Pr/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-300 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-all duration-300 font-medium"
+              className="btn btn-ghost"
             >
-              <Download size={18} />
-              Download CV
-            </motion.a>
-          </motion.div>
-        </motion.div>
+              download CV ↓
+            </a>
+            <span className="hidden sm:flex items-center gap-2 btn btn-ghost !border-transparent cursor-default" aria-label="Based in Alexandria, Egypt">
+              <MapPin size={14} aria-hidden="true" />
+              <span>Alexandria, Egypt</span>
+            </span>
+          </div>
+        </SectionFade>
       </div>
     </section>
   );

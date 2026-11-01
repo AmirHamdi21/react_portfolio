@@ -1,22 +1,19 @@
-import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { PanelHead } from '../ui/PanelHead';
+import { SectionFade } from '../ui/SectionFade';
 
 const experiences = [
   {
     title: 'Mobile Development Intern',
-    company: 'DEPI Internship',
+    company: 'Digital Egypt Pioneers Initiative (DEPI)',
     location: 'Remote',
-    period: '10-2024 – Present',
-    type: 'Internship',
-    description: 'Actively participating in a comprehensive mobile development internship program focused on modern mobile app development.',
+    period: 'Nov 2024 – May 2025',
+    description: 'A 6-month intensive mobile development internship at the Mobile track of the Digital Egypt Pioneers Initiative (DEPI), Ministry of Communications and Information Technology.',
     responsibilities: [
-      'Learning advanced Java and Kotlin programming for Android development',
-      'Mastering Dart language fundamentals and advanced concepts',
-      'Building a comprehensive fitness application as the main project',
-      'Implementing state management using Bloc pattern for scalable app architecture',
-      'Integrating Firebase Cloud Messaging (FCM) for push notifications',
-      'Collaborating with team members on code reviews and best practices'
+      'Built Fitlytic, a fitness tracking app with Flutter and Dart featuring workout and calorie tracking, using BLoC/Cubit for state management and Firebase / MySQL + PHP REST API',
+      'Integrated Firebase Cloud Messaging (FCM) to deliver push notifications for workout reminders',
+      'Developed multiple Flutter applications applying structured UI development, reusable widgets, and mobile app best practices',
+      'Collaborated in a team of 5 using Git and GitHub to deliver the Fitlytic app over 6 months',
     ],
   },
   {
@@ -24,111 +21,46 @@ const experiences = [
     company: 'ALX',
     location: 'Remote',
     period: '2023 – 2024',
-    type: 'Internship',
     description: 'Completed an intensive software engineering program focused on full-stack development and industry best practices.',
     responsibilities: [
       'Developed proficiency in multiple programming languages and frameworks',
       'Participated in collaborative coding projects and peer programming sessions',
       'Learned software engineering principles including version control, testing, and deployment',
       'Completed hands-on projects demonstrating problem-solving and technical skills',
-      'Engaged in continuous learning and professional development activities'
+      'Engaged in continuous learning and professional development activities',
     ],
   },
 ];
 
 export const Experience = () => {
   return (
-    <SectionWrapper id="experience" className="bg-neutral-50 dark:bg-neutral-800">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <Briefcase className="w-8 h-8 text-primary-600 dark:text-primary-400" />
-            <h2 className="text-4xl font-bold text-neutral-900 dark:text-white">
-              Experience & Internships
-            </h2>
-          </div>
-          <div className="w-24 h-1 bg-primary-600 mx-auto rounded-full mb-4" />
-          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg">
-            My professional journey and learning experiences in software development and mobile app creation.
-          </p>
-        </motion.div>
-
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden"
-            >
-              <div className="p-8">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                  <div className="mb-4 md:mb-0">
-                    <h3 className="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
-                      {exp.title}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-4 text-neutral-600 dark:text-neutral-400">
-                      <span className="text-lg font-medium text-primary-600 dark:text-primary-400">
-                        {exp.company}
-                      </span>
-                      <div className="flex items-center gap-1">
-                        <MapPin size={16} />
-                        <span>{exp.location}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar size={16} />
-                        <span>{exp.period}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-shrink-0">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300">
-                      {exp.type}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+    <SectionWrapper id="experience">
+      <PanelHead title="Field log" note="experience & internships" />
+      <div className="bg-panel border border-edge rounded-md">
+        {experiences.map((exp, index) => (
+          <SectionFade key={exp.title} delay={index * 0.06}>
+            <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] gap-x-6 gap-y-2 p-6 md:p-[26px] border-b border-edge last:border-b-0">
+              <p className="font-mono text-[12px] text-ink-faint leading-relaxed tabular pt-1">
+                {exp.period} · {exp.location.toLowerCase()}
+              </p>
+              <div>
+                <h3 className="text-[15.5px] font-semibold text-ink">{exp.title}</h3>
+                <p className="font-mono text-[12px] text-amber my-2">{exp.company}</p>
+                <p className="text-[13px] text-ink-dim max-w-[66ch] leading-relaxed">
                   {exp.description}
                 </p>
-
-                {/* Responsibilities */}
-                <div>
-                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4">
-                    Key Responsibilities & Learning:
-                  </h4>
-                  <ul className="space-y-3">
-                    {exp.responsibilities.map((responsibility, respIndex) => (
-                      <motion.li
-                        key={respIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: (index * 0.2) + (respIndex * 0.1) }}
-                        className="flex items-start gap-3"
-                      >
-                        <div className="flex-shrink-0 w-2 h-2 bg-primary-600 rounded-full mt-2" />
-                        <span className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                          {responsibility}
-                        </span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
+                <ul className="mt-3.5 space-y-2">
+                  {exp.responsibilities.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-[13px] text-ink-dim leading-relaxed max-w-[66ch]">
+                      <span aria-hidden="true" className="font-mono text-[11px] text-amber mt-[3px]">·</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </SectionFade>
+        ))}
       </div>
     </SectionWrapper>
   );

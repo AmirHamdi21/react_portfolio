@@ -1,116 +1,100 @@
-import { motion } from 'framer-motion';
-import { GraduationCap, Globe, Shield } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { SectionWrapper } from '../ui/SectionWrapper';
+import { PanelHead } from '../ui/PanelHead';
+import { SectionFade } from '../ui/SectionFade';
+
+const facts = [
+  'Arabic — native',
+  'English — fluent',
+  'Military status — postponed',
+];
 
 export const About = () => {
   return (
-    <SectionWrapper id="about" className="bg-white dark:bg-neutral-900">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto rounded-full" />
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Career Objective */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">
-              Career Objective
-            </h3>
-            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed text-lg">
-              A skilled mobile developer specializing in building high-quality, cross-platform mobile applications. 
-              Expertise in Flutter and Android development (Java/Kotlin) ensures seamless, high-performance apps 
-              with smooth UI/UX, optimized for speed, scalability, and maintainability. Focused on delivering 
-              efficient, well-structured code that guarantees a flawless user experience and rapid deployment. 
-              Passionate about innovation, problem-solving, and delivering top-notch mobile solutions across 
-              freelance projects and full-time roles.
+    <SectionWrapper id="about">
+      <PanelHead
+        title="About"
+        note="owner’s record · junior Flutter / mobile role wanted"
+      />
+      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-6 items-start">
+        {/* Narrative */}
+        <SectionFade>
+          <div className="space-y-5 max-w-[66ch]">
+            <p className="text-lg md:text-xl leading-relaxed text-ink text-balance">
+              Flutter developer and Communication &amp; Electronics Engineering
+              graduate, building cross-platform mobile apps with{' '}
+              <span className="text-amber font-medium">
+                Dart, Flutter, Firebase, and BLoC/Cubit
+              </span>
+              .
             </p>
-          </motion.div>
+            <p className="text-[15px] leading-relaxed text-ink-dim">
+              Built EduVerse, a multi-role educational platform with a NestJS and
+              MySQL backend and AI integration. Seeking a junior Flutter / mobile
+              developer role where I can ship reliable, well-structured features
+              from day one.
+            </p>
+            <ul className="flex flex-wrap gap-2 pt-1">
+              {facts.map((fact) => (
+                <li key={fact}>
+                  <span className="chip">{fact}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </SectionFade>
 
-          {/* Education & Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            {/* Education */}
-            <div className="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </div>
+        {/* Education module */}
+        <SectionFade delay={0.08}>
+          <aside className="bg-panel border border-edge rounded-md overflow-hidden">
+            <div className="bg-panel-2 border-b border-edge px-5 py-2.5 font-mono text-[12px] text-ink-dim flex items-center justify-between">
+              <span>edu</span>
+              <span className="text-ink-faint">module</span>
+            </div>
+            <div className="p-6">
+              <h3 className="text-lg font-semibold text-ink leading-snug">
+                B.Sc. Communication &amp; Electronics Engineering
+              </h3>
+              <p className="text-[13.5px] text-ink-dim mt-1">
+                Alexandria University — Faculty of Engineering
+              </p>
+              <p className="font-mono text-[12px] text-ink-faint mt-1 tabular">
+                09/2021 – 07/2026 · Alexandria, EG
+              </p>
+
+              <div className="my-5 border-t border-edge" />
+
+              <div className="flex items-end justify-between gap-4">
                 <div>
-                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-white">Education</h4>
+                  <p className="font-mono text-[11px] text-ink-faint mb-1">CGPA</p>
+                  <p className="text-2xl font-semibold text-ink tabular leading-none">
+                    3.65
+                    <span className="text-[13px] font-medium text-ink-faint"> / 4.00</span>
+                  </p>
                 </div>
+                <span className="chip border-amber text-amber">Excellent</span>
               </div>
-              <div className="space-y-2">
-                <h5 className="font-medium text-neutral-900 dark:text-white">
-                  Alexandria University
-                </h5>
-                <p className="text-neutral-600 dark:text-neutral-400">
-                  Faculty of Engineering, Communication & Electronics
-                </p>
-                <p className="text-neutral-600 dark:text-neutral-400">
-                  2021 – 2026 (Expected)
-                </p>
-                <p className="text-primary-600 dark:text-primary-400 font-semibold">
-                  CGPA: 3.61 / 4.00 (Excellent)
-                </p>
+
+              <div className="my-5 border-t border-edge" />
+
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[13.5px] font-medium text-ink">Graduation project</p>
+                  <p className="text-[13px] text-ink-dim mt-1 leading-snug">
+                    EduVerse — educational management platform with AI integration
+                  </p>
+                </div>
+                <a
+                  href="#projects"
+                  className="mt-0.5 inline-flex shrink-0 text-amber hover:text-ink transition-colors duration-200"
+                  aria-label="View the EduVerse graduation project"
+                >
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </a>
               </div>
             </div>
-
-            {/* Languages */}
-            <div className="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <Globe className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-white">Languages</h4>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-neutral-700 dark:text-neutral-300">Arabic</span>
-                  <span className="text-primary-600 dark:text-primary-400 font-medium">Native</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-neutral-700 dark:text-neutral-300">English</span>
-                  <span className="text-primary-600 dark:text-primary-400 font-medium">Fluent</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Military Status */}
-            <div className="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-neutral-900 dark:text-white">Military Status</h4>
-                </div>
-              </div>
-              <p className="text-neutral-600 dark:text-neutral-400">Postponed</p>
-            </div>
-          </motion.div>
-        </div>
+          </aside>
+        </SectionFade>
       </div>
     </SectionWrapper>
   );

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AH slogan — instrument-style options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* dark field tokens (= site default) */
+    --c-field:#101418; --c-panel:#171C22; --c-panel2:#1D242C;
+    --c-edge:#2A323C; --c-edge-hi:#3A4552;
+    --c-text:#E8E6DF; --c-dim:#9AA3AD; --c-faint:#76818E;
+    --c-amber:#E8A33D; --c-ok:#7DBB6C;
+  }
+  .theme-light {
+    /* bench light tokens */
+    --c-field:#F2F2EF; --c-panel:#FBFBF9; --c-panel2:#ECECE7;
+    --c-edge:#D9D8D0; --c-edge-hi:#B9B8AE;
+    --c-text:#1A1D21; --c-dim:#5C6268; --c-faint:#5D6461;
+    --c-amber:#B45309; --c-ok:#3E7A33;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--c-field); color:var(--c-text); font-family:"IBM Plex Sans",sans-serif; padding:48px 24px 80px; transition:background .3s; }
+  .wrap { max-width:880px; margin:0 auto; }
+  h1 { font-size:22px; font-weight:600; letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; }
+  h1 .tick { color:var(--c-amber); font-family:"IBM Plex Mono",monospace; font-size:13px; }
+  .sub { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--c-faint); margin:10px 0 40px; }
+  .variant { border-top:1px solid var(--c-edge); padding:36px 0 40px; }
+  .vhead { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:18px; }
+  .vname { font-family:"IBM Plex Mono",monospace; font-size:14px; font-weight:600; color:var(--c-text); }
+  .vnum { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--c-amber); }
+  .vdesc { font-size:13.5px; color:var(--c-dim); max-width:66ch; line-height:1.6; margin-bottom:20px; }
+  .stages { display:flex; flex-direction:column; gap:14px; }
+  .stage { background:var(--c-panel); border:1px solid var(--c-edge); border-radius:8px; padding:22px 26px; display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+  .stage-label { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--c-faint); writing-mode:vertical-rl; text-orientation:mixed; letter-spacing:.08em; }
+  .stage-light { background:var(--c-field); }
+  svg.ah { display:block; }
+  .big svg.ah { width:264px; height:106px; }
+  /* fake status bar for size test */
+  .fakebar { display:flex; align-items:center; gap:0; font-family:"IBM Plex Mono",monospace; font-size:11px; flex:1 1 240px; min-width:240px; border:1px solid var(--c-edge); border-radius:4px; overflow:hidden; background:var(--c-field); }
+  .fakebar > span { display:flex; align-items:center; gap:6px; padding:4px 10px; color:var(--c-dim); white-space:nowrap; }
+  .fakebar > span + span { border-left:1px solid var(--c-edge); }
+  .fakebar b { font-weight:500; color:var(--c-text); }
+  .led { width:6px; height:6px; border-radius:9999px; background:var(--c-ok); box-shadow:0 0 6px var(--c-ok); }
+  .strip-slot { padding:3px 10px 3px 8px; display:flex; align-items:center; border-left:1px solid var(--c-edge); }
+  .strip-slot svg { height:26px; width:auto; }
+  .note { font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--c-faint); margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="tick">▮</span> AH slogan — 5 instrument-style options</h1>
+  <p class="sub">inline SVG · design-system tokens · scales to any slot · both themes tested ↓</p>
+
+  <!-- ============ V1 : ID PLATE ============ -->
+  <div class="variant">
+    <div class="vhead"><span class="vname">01 · id-plate</span><span class="vnum">panel + corner screws + amber underline</span></div>
+    <p class="vdesc">Reads like a labeled unit on a test bench: panel background, 4 corner screws, bold Plex Sans "AH", amber calibration rule beneath. The most object-like of the five — hides nicely in the status bar as a small ID tag.</p>
+    <div class="stages">
+      <div class="stage big">
+        <span class="stage-label">240%</span>
+        <svg class="ah" viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AH id plate mark">
+          <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+          <circle cx="9" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <circle cx="151" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <circle cx="9" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <circle cx="151" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <text x="80" y="40" text-anchor="middle" font-family="IBM Plex Sans" font-weight="600" font-size="30" letter-spacing="2" fill="var(--c-text)">AH</text>
+          <line x1="57" y1="50" x2="103" y2="50" stroke="var(--c-amber)" stroke-width="2"/>
+          <line x1="80" y1="47.5" x2="80" y2="52.5" stroke="var(--c-amber)" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="stage">
+        <span class="stage-label">status-bar</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <circle cx="9" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="151" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="9" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="151" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <text x="80" y="40" text-anchor="middle" font-family="IBM Plex Sans" font-weight="600" font-size="30" letter-spacing="2" fill="var(--c-text)">AH</text>
+              <line x1="57" y1="50" x2="103" y2="50" stroke="var(--c-amber)" stroke-width="2"/>
+              <line x1="80" y1="47.5" x2="80" y2="52.5" stroke="var(--c-amber)" stroke-width="2"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+          <span>role <b>Flutter / mobile dev</b></span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <span class="stage-label">bench-light</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <circle cx="9" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="151" cy="9" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="9" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <circle cx="151" cy="55" r="1.7" fill="none" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <text x="80" y="40" text-anchor="middle" font-family="IBM Plex Sans" font-weight="600" font-size="30" letter-spacing="2" fill="var(--c-text)">AH</text>
+              <line x1="57" y1="50" x2="103" y2="50" stroke="var(--c-amber)" stroke-width="2"/>
+              <line x1="80" y1="47.5" x2="80" y2="52.5" stroke="var(--c-amber)" stroke-width="2"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ V2 : SEGMENT DISPLAY ============ -->
+  <div class="variant">
+    <div class="vname-vhead"><div class="vhead"><span class="vname">02 · segment-display</span><span class="vnum">seven-segment cells, lit amber vs faint unlit</span></div></div>
+    <p class="vdesc">The purest "instrument": the letters are rendered as seven-segment display cells, with the unlit segments kept faintly visible underneath — exactly like a real LED/LCD readout. Unmistakably data, zero decoration.</p>
+    <div class="stages">
+      <div class="stage big">
+        <span class="stage-label">240%</span>
+        <svg class="ah" viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AH seven-segment mark">
+          <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+          <!-- cell template: cx = x origin, cy = y origin; cell 30x48 -->
+          <!-- letter A : x=42 -->
+          <g transform="translate(42 8)">
+            <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+            <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+            <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+            <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+          </g>
+          <!-- letter H : x=88 -->
+          <g transform="translate(88 8)">
+            <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+            <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+            <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+            <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+            <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stage">
+        <span class="stage-label">status-bar</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <g transform="translate(42 8)">
+                <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+              </g>
+              <g transform="translate(88 8)">
+                <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+              </g>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+          <span>role <b>Flutter / mobile dev</b></span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <span class="stage-label">bench-light</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="158" height="62" rx="6" fill="var(--c-panel)" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <g transform="translate(42 8)">
+                <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+              </g>
+              <g transform="translate(88 8)">
+                <rect x="7" y="0" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="7" y="21" width="16" height="6" rx="1" fill="var(--c-amber)"/>
+                <rect x="7" y="42" width="16" height="6" rx="1" fill="var(--c-edge)" opacity=".35"/>
+                <rect x="0" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="0" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="7" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+                <rect x="24" y="28" width="6" height="13" rx="1" fill="var(--c-amber)"/>
+              </g>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ V3 : GAUGE NEEDLE ============ -->
+  <div class="variant">
+    <div class="vhead"><span class="vname">03 · gauge-needle</span><span class="vnum">H crossbar extends into an amber needle + tick scale</span></div>
+    <p class="vdesc">The H's crossbar becomes a measuring needle that lands on a tick scale — the mark literally "measures". Keeps the site typography (real letters), adds one clever instrument idea instead of a box.</p>
+    <div class="stages">
+      <div class="stage big">
+        <span class="stage-label">240%</span>
+        <svg class="ah" viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AH gauge needle mark">
+          <text x="6" y="46" font-family="IBM Plex Sans" font-weight="600" font-size="40" letter-spacing="1" fill="var(--c-text)">AH</text>
+          <!-- scale -->
+          <line x1="140" y1="10" x2="140" y2="54" stroke="var(--c-edge)" stroke-width="1.5"/>
+          <line x1="144" y1="14" x2="148" y2="14" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <line x1="144" y1="24" x2="148" y2="24" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <line x1="144" y1="44" x2="148" y2="44" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <line x1="144" y1="54" x2="156" y2="54" stroke="var(--c-edge-hi)" stroke-width="1"/>
+          <!-- needle = crossbar level -->
+          <line x1="83" y1="33" x2="139" y2="33" stroke="var(--c-amber)" stroke-width="2.5"/>
+          <line x1="132" y1="28" x2="132" y2="38" stroke="var(--c-amber)" stroke-width="2"/>
+          <circle cx="83" cy="33" r="2.5" fill="var(--c-amber)"/>
+        </svg>
+      </div>
+      <div class="stage">
+        <span class="stage-label">status-bar</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <text x="6" y="46" font-family="IBM Plex Sans" font-weight="600" font-size="40" letter-spacing="1" fill="var(--c-text)">AH</text>
+              <line x1="140" y1="10" x2="140" y2="54" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <line x1="144" y1="14" x2="148" y2="14" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="24" x2="148" y2="24" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="44" x2="148" y2="44" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="54" x2="156" y2="54" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="83" y1="33" x2="139" y2="33" stroke="var(--c-amber)" stroke-width="2.5"/>
+              <line x1="132" y1="28" x2="132" y2="38" stroke="var(--c-amber)" stroke-width="2"/>
+              <circle cx="83" cy="33" r="2.5" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+          <span>role <b>Flutter / mobile dev</b></span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <span class="stage-label">bench-light</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <text x="6" y="46" font-family="IBM Plex Sans" font-weight="600" font-size="40" letter-spacing="1" fill="var(--c-text)">AH</text>
+              <line x1="140" y1="10" x2="140" y2="54" stroke="var(--c-edge)" stroke-width="1.5"/>
+              <line x1="144" y1="14" x2="148" y2="14" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="24" x2="148" y2="24" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="44" x2="148" y2="44" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="144" y1="54" x2="156" y2="54" stroke="var(--c-edge-hi)" stroke-width="1"/>
+              <line x1="83" y1="33" x2="139" y2="33" stroke="var(--c-amber)" stroke-width="2.5"/>
+              <line x1="132" y1="28" x2="132" y2="38" stroke="var(--c-amber)" stroke-width="2"/>
+              <circle cx="83" cy="33" r="2.5" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ V4 : TERMINAL CURSOR ============ -->
+  <div class="variant">
+    <div class="vhead"><span class="vname">04 · terminal-cursor</span><span class="vnum">mono AH + amber block cursor, viewfinder corners</span></div>
+    <p class="vdesc">The boot-line metaphor made into a logo: mono "AH" with a phosphor block cursor parked after it, framed only by four viewfinder corner ticks (like an instrument being aligned). Will match the "$ whoami" line one-to-one.</p>
+    <div class="stages">
+      <div class="stage big">
+        <span class="stage-label">240%</span>
+        <svg class="ah" viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AH terminal cursor mark">
+          <path d="M6 14 V6 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+          <path d="M154 14 V6 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+          <path d="M6 50 v8 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+          <path d="M154 50 v8 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+          <text x="30" y="44" font-family="IBM Plex Mono" font-weight="600" font-size="30" fill="var(--c-text)">AH</text>
+          <rect x="72" y="21" width="15" height="25" fill="var(--c-amber)"/>
+        </svg>
+      </div>
+      <div class="stage">
+        <span class="stage-label">status-bar</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 14 V6 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M154 14 V6 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M6 50 v8 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M154 50 v8 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <text x="30" y="44" font-family="IBM Plex Mono" font-weight="600" font-size="30" fill="var(--c-text)">AH</text>
+              <rect x="72" y="21" width="15" height="25" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+          <span>role <b>Flutter / mobile dev</b></span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <span class="stage-label">bench-light</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 14 V6 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M154 14 V6 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M6 50 v8 h8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <path d="M154 50 v8 h-8" fill="none" stroke="var(--c-edge-hi)" stroke-width="1.5"/>
+              <text x="30" y="44" font-family="IBM Plex Mono" font-weight="600" font-size="30" fill="var(--c-text)">AH</text>
+              <rect x="72" y="21" width="15" height="25" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ V5 : PHOSPHOR TRACE ============ -->
+  <div class="variant">
+    <div class="vhead"><span class="vname">05 · phosphor-trace</span><span class="vnum">stroked AH + oscilloscope trace through the crossbar</span></div>
+    <p class="vdesc">Letters drawn as thin strokes with a signal trace running through the crossbar level, ending in a phosphor dot — the mark behaves like a scope display with the signal passing through "AH". The most "alive" of the five.</p>
+    <div class="stages">
+      <div class="stage big">
+        <span class="stage-label">240%</span>
+        <svg class="ah" viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AH phosphor trace mark">
+          <line x1="4" y1="56" x2="156" y2="56" stroke="var(--c-edge)" stroke-width="1" stroke-dasharray="2 4"/>
+          <path d="M34 50 L46 18 L58 50 M39.5 38.5 H52.5" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M72 18 V50 M94 18 V50 M72 34 H94" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="8" y1="34" x2="152" y2="34" stroke="var(--c-amber)" stroke-width="1.25" opacity=".85"/>
+          <circle cx="152" cy="34" r="3" fill="var(--c-amber)"/>
+        </svg>
+      </div>
+      <div class="stage">
+        <span class="stage-label">status-bar</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="4" y1="56" x2="156" y2="56" stroke="var(--c-edge)" stroke-width="1" stroke-dasharray="2 4"/>
+              <path d="M34 50 L46 18 L58 50 M39.5 38.5 H52.5" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M72 18 V50 M94 18 V50 M72 34 H94" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="8" y1="34" x2="152" y2="34" stroke="var(--c-amber)" stroke-width="1.25" opacity=".85"/>
+              <circle cx="152" cy="34" r="3" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+          <span>role <b>Flutter / mobile dev</b></span>
+        </div>
+      </div>
+      <div class="stage stage-light">
+        <span class="stage-label">bench-light</span>
+        <div class="fakebar">
+          <span><i class="led"></i><b>available</b></span>
+          <span class="strip-slot">
+            <svg viewBox="0 0 160 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="4" y1="56" x2="156" y2="56" stroke="var(--c-edge)" stroke-width="1" stroke-dasharray="2 4"/>
+              <path d="M34 50 L46 18 L58 50 M39.5 38.5 H52.5" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M72 18 V50 M94 18 V50 M72 34 H94" fill="none" stroke="var(--c-text)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="8" y1="34" x2="152" y2="34" stroke="var(--c-amber)" stroke-width="1.25" opacity=".85"/>
+              <circle cx="152" cy="34" r="3" fill="var(--c-amber)"/>
+            </svg>
+          </span>
+          <span>loc <b>Alexandria, EG · UTC+2</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">each mark is one self-contained &lt;svg&gt; using the site CSS vars — drops straight into StatusBar / NavBar / footer, theme-safe in both directions.</p>
+</div>
+</body>
+</html>

@@ -1,10 +1,10 @@
 # Amir Mohamed Hamdi El Sayed - Portfolio Website
 
-A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Features a clean design with dark/light mode support and smooth animations.
+A modern, responsive portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion — designed with the **"The Instrument"** design system (panels, status semantics, IBM Plex type, amber accent). See [`design-system/MASTER.md`](design-system/MASTER.md) for the full design contract.
 
 ## 🚀 Features
 
-- **Modern Design**: Clean, professional aesthetic with subtle animations
+- **"The Instrument" design system**: instrument-panel aesthetic with semantic tokens; anti-AI-slop rules enforced (see MASTER.md §8)
 - **Dark/Light Mode**: Toggle between themes with preference persistence
 - **Fully Responsive**: Optimized for mobile, tablet, and desktop
 - **Smooth Animations**: Powered by Framer Motion for enhanced UX
@@ -89,17 +89,11 @@ The build files will be generated in the `dist` directory.
 
 ### Colors
 
-The color scheme can be customized in `tailwind.config.js`:
+Colors are **semantic CSS variables** (defined in `src/index.css`, mapped in `tailwind.config.js`). Change values in `:root` (bench light) and `.dark` (dark field) — never hard-code hex in components. Full token reference: `design-system/MASTER.md` §3.
 
-```js
-colors: {
-  primary: {
-    // Custom primary colors
-    500: '#0ea5e9',
-    600: '#0284c7',
-    // ... other shades
-  },
-}
+```css
+:root { --c-amber: #B45309; /* accent, bench light */ }
+.dark { --c-amber: #E8A33D; /* accent, dark field */ }
 ```
 
 ### Content Updates
@@ -114,7 +108,8 @@ colors: {
 - Add project screenshots to public folder and update image URLs
 
 #### Skills
-- Update skill lists and percentages in `src/components/sections/Skills.tsx`
+- Update capability modules (load-dot levels) and chip lists in `src/components/sections/Skills.tsx`
+- Note: percent progress bars are **banned** by the design system (recruiter credibility) — express seniority via the module dots
 
 #### Experience
 - Modify work experience details in `src/components/sections/Experience.tsx`

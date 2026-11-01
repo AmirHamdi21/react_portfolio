@@ -1,125 +1,115 @@
-import { motion } from 'framer-motion';
 import { SectionWrapper } from '../ui/SectionWrapper';
-import { ProgressBar } from '../ui/ProgressBar';
+import { PanelHead } from '../ui/PanelHead';
+import { SectionFade } from '../ui/SectionFade';
 import { SkillBadge } from '../ui/SkillBadge';
-import { Code, Wrench, Heart } from 'lucide-react';
 
-const technicalSkills = [
-  { skill: 'Flutter', percentage: 100 },
-  { skill: 'Dart', percentage: 100 },
-  { skill: 'SQLite', percentage: 100 },
-  { skill: 'GetX & Bloc', percentage: 100 },
-  { skill: 'Git & GitHub', percentage: 95 },
-  { skill: 'MySQL', percentage: 95 },
-  { skill: 'Python', percentage: 90 },
-  { skill: 'Firebase', percentage: 80 },
-  { skill: 'Microsoft Office', percentage: 80 },
-  { skill: 'Java', percentage: 70 },
-  { skill: 'Supabase', percentage: 70 },
-  { skill: 'Kotlin', percentage: 30 },
+/**
+ * Capability modules — weight is expressed with load dots (calibrated),
+ * never with percent bars (banned: MASTER.md §8.9).
+ */
+const modules = [
+  {
+    name: 'core runtime',
+    level: 4,
+    items: <><b>Flutter</b> · <b>Dart</b> · <b>BLoC / Cubit</b> · <b>GetX</b></>,
+  },
+  {
+    name: 'data & storage',
+    level: 3,
+    items: <><b>Firebase</b> · MySQL · Sqflite · <b>REST APIs</b> · Supabase · Hive</>,
+  },
+  {
+    name: 'backend',
+    level: 2,
+    items: <><b>NestJS</b> · PHP · WebSockets · push (FCM)</>,
+  },
+  {
+    name: 'adjacent',
+    level: 1,
+    items: <>Android (Java/Kotlin) · Python · Java · C · Assembly</>,
+  },
 ];
 
 const supportingTech = [
-  'PHP', 'Hive', 'WebSockets', 'UI/UX', 'Push Notifications', 'Windows & Linux'
+  'Git & GitHub',
+  'OOP',
+  'State management',
+  'Push notifications',
+  'Linux',
+  'Windows',
 ];
 
 const softSkills = [
-  'Flexible', 'Time Management', 'Multitasking', 'Attention to Detail', 
-  'Self-Motivation', 'Team Collaboration', 'Creativity'
+  'Flexible',
+  'Time management',
+  'Multitasking',
+  'Attention to detail',
+  'Self-motivation',
+  'Team collaboration',
+  'Creativity',
 ];
+
+const LoadDots = ({ level }: { level: number }) => (
+  <span
+    role="img"
+    aria-label={`daily use level ${level} of 4`}
+    className="flex gap-1"
+  >
+    {Array.from({ length: 4 }, (_, i) => (
+      <i
+        key={i}
+        aria-hidden="true"
+        className={`w-2.5 h-[3px] rounded-sm ${i < level ? 'bg-amber' : 'bg-edge-hi'}`}
+      />
+    ))}
+  </span>
+);
 
 export const Skills = () => {
   return (
-    <SectionWrapper id="skills" className="bg-neutral-50 dark:bg-neutral-800">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-neutral-900 dark:text-white mb-4">
-            Skills & Expertise
-          </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto rounded-full" />
-        </motion.div>
+    <SectionWrapper id="skills">
+      <PanelHead
+        title="Capability cluster"
+        note="no percent bars — dots indicate daily use"
+      />
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Technical Skills */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+      <SectionFade>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {modules.map((mod) => (
+            <div
+              key={mod.name}
+              className="bg-panel border border-edge rounded p-[18px] hover:border-edge-hi transition-colors duration-200"
+            >
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-[12.5px] font-semibold text-ink">{mod.name}</span>
+                <LoadDots level={mod.level} />
               </div>
-              <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                Technical Skills
-              </h3>
+              <p className="font-mono text-[12px] leading-[1.8] text-ink-dim">{mod.items}</p>
             </div>
-
-            <div className="space-y-4">
-              {technicalSkills.map((skill, index) => (
-                <ProgressBar
-                  key={skill.skill}
-                  skill={skill.skill}
-                  percentage={skill.percentage}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Supporting Technologies & Soft Skills */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8"
-          >
-            {/* Supporting Technologies */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <Wrench className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                  Supporting Technologies
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {supportingTech.map((tech, index) => (
-                  <SkillBadge key={tech} skill={tech} index={index} />
-                ))}
-              </div>
-            </div>
-
-            {/* Soft Skills */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                </div>
-                <h3 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                  Soft Skills
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {softSkills.map((skill, index) => (
-                  <SkillBadge key={skill} skill={skill} index={index} />
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          ))}
         </div>
+        <p className="mt-3 font-mono text-[11px] text-ink-faint">
+          method platform: <span className="text-ink-dim">Linux · Windows · Git &amp; GitHub</span>
+        </p>
+      </SectionFade>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-12">
+        <SectionFade>
+          <h3 className="font-mono text-[12px] text-ink-faint mb-3.5">supporting technologies</h3>
+          <div className="flex flex-wrap gap-2">
+            {supportingTech.map((tech, i) => (
+              <SkillBadge key={tech} skill={tech} index={i} />
+            ))}
+          </div>
+        </SectionFade>
+        <SectionFade delay={0.08}>
+          <h3 className="font-mono text-[12px] text-ink-faint mb-3.5">soft skills</h3>
+          <div className="flex flex-wrap gap-2">
+            {softSkills.map((skill, i) => (
+              <SkillBadge key={skill} skill={skill} index={i} />
+            ))}
+          </div>
+        </SectionFade>
       </div>
     </SectionWrapper>
   );

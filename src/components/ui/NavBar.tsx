@@ -1,28 +1,23 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useDarkMode } from '../../hooks/useDarkMode';
 
 const navigation = [
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Certificates', href: '#certificates' },
+  { name: 'Log', href: '#experience' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export const NavBar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleDark } = useDarkMode();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const closeMenu = () => setIsMobileMenuOpen(false);
+    window.addEventListener('resize', closeMenu);
+    return () => window.removeEventListener('resize', closeMenu);
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -34,90 +29,77 @@ export const NavBar = () => {
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    <nav className="sticky top-0 z-20 bg-field border-b border-edge transition-colors duration-300">
+      <div className="max-w-site mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14 gap-4">
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="font-mono font-semibold text-ink text-[14px] tracking-tight"
           >
-            <span className="text-2xl font-bold text-neutral-900 dark:text-white">
-              Amir<span className="text-primary-600">Dev</span>
-            </span>
-          </motion.div>
+            amir-hamdi<span className="text-amber">::</span>
+          </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8">
-              {navigation.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 text-sm font-medium transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
-              ))}
+          {/* Desktop navigation */}
+          <div className="hidden sm:flex items-center gap-1">
+            {navigation.map((item) => (
               <button
-                onClick={toggleDark}
-                className="p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700 transition-colors duration-200"
-                aria-label="Toggle dark mode"
+                key={item.name}
+                onClick={() => scrollToSection(item.href)}
+                className="px-3 py-1.5 text-[13px] text-ink-dim hover:text-ink border border-transparent hover:border-edge rounded transition-colors duration-200"
               >
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                {item.name.toLowerCase()}
               </button>
-            </div>
+            ))}
+            <button
+              onClick={toggleDark}
+              className="ml-1 px-3 py-1.5 font-mono text-xs text-ink-dim bg-panel border border-edge hover:border-edge-hi hover:text-ink rounded transition-colors duration-200"
+              aria-label={isDark ? 'Switch to bench light mode' : 'Switch to dark field mode'}
+            >
+              ◐ <span aria-hidden="true">{isDark ? 'bench light' : 'dark field'}</span>
+            </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="sm:hidden flex items-center gap-2">
             <button
               onClick={toggleDark}
-              className="p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300"
-              aria-label="Toggle dark mode"
+              className="px-3 py-1.5 font-mono text-xs text-ink-dim bg-panel border border-edge rounded"
+              aria-label={isDark ? 'Switch to bench light mode' : 'Switch to dark field mode'}
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              ◐
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-300"
+              className="p-2 text-ink-dim bg-panel border border-edge rounded"
+              aria-expanded={isMobileMenuOpen}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile navigation */}
       {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-700"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="sm:hidden absolute top-full left-0 right-0 bg-field border-b border-edge shadow-panel">
+          <div className="px-4 py-3 space-y-1">
             {navigation.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-md transition-colors duration-200"
+                className="block w-full text-left px-3 py-2 text-sm text-ink-dim hover:text-ink hover:bg-panel rounded transition-colors duration-200"
               >
-                {item.name}
+                {item.name.toLowerCase()}
               </button>
             ))}
           </div>
-        </motion.div>
+        </div>
       )}
-    </motion.nav>
+    </nav>
   );
 };

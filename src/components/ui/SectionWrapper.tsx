@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
 
 interface SectionWrapperProps {
   id: string;
@@ -7,21 +6,17 @@ interface SectionWrapperProps {
   className?: string;
 }
 
+/**
+ * Full-width section shell of "The Instrument": field background, border
+ * separation between sections (structure from borders, not shadows).
+ */
 export const SectionWrapper = ({ id, children, className = '' }: SectionWrapperProps) => {
   return (
     <section
       id={id}
-      className={`py-20 px-4 sm:px-6 lg:px-8 ${className}`}
+      className={`scroll-mt-24 border-t border-edge px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-field ${className}`}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-7xl mx-auto"
-      >
-        {children}
-      </motion.div>
+      <div className="max-w-6xl mx-auto">{children}</div>
     </section>
   );
 };

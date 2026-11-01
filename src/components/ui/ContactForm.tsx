@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Mail, User, MessageSquare } from 'lucide-react';
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +13,10 @@ export const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Placeholder for form submission
-    // In a real app, you'd send this to your backend or use a service like Formspree
-    const mailtoLink = `mailto:amirhamdi2112@gmail.com?subject=Contact from ${formData.name}&body=${encodeURIComponent(
+    // Opens the visitor's mail client — no backend required.
+    const mailtoLink = `mailto:amirhamdi2112@gmail.com?subject=Contact from ${encodeURIComponent(
+      formData.name
+    )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
 
@@ -36,90 +35,78 @@ export const ContactForm = () => {
     });
   };
 
+  const inputClass =
+    'w-full px-3.5 py-2.5 bg-field border border-edge rounded text-[14px] text-ink placeholder:text-ink-faint focus:border-amber focus:outline-none focus:ring-1 focus:ring-amber transition-all duration-200';
+
   return (
-    <motion.form
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      onSubmit={handleSubmit}
-      className="space-y-6"
-    >
-      <div className="grid md:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-            Name
+          <label htmlFor="name" className="block font-mono text-[11px] text-ink-faint mb-1.5">
+            name
           </label>
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400" size={18} />
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full pl-10 pr-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-              placeholder="Your name"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-            Email
-          </label>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400" size={18} />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full pl-10 pr-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
-              placeholder="your.email@example.com"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-          Message
-        </label>
-        <div className="relative">
-          <MessageSquare className="absolute left-3 top-3 text-neutral-400" size={18} />
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
             required
-            rows={5}
-            className="w-full pl-10 pr-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-500 dark:placeholder-neutral-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-vertical"
-            placeholder="Tell me about your project or just say hello!"
+            className={inputClass}
+            placeholder="Your name"
+            autoComplete="name"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className="block font-mono text-[11px] text-ink-faint mb-1.5">
+            email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className={inputClass}
+            placeholder="you@domain.com"
+            autoComplete="email"
           />
         </div>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+      <div>
+        <label htmlFor="message" className="block font-mono text-[11px] text-ink-faint mb-1.5">
+          message
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          rows={5}
+          className={`${inputClass} resize-y min-h-[120px]`}
+          placeholder="What can I help you with?"
+        />
+      </div>
+
+      <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full flex items-center justify-center gap-2 px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium"
+        className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
-          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          <span
+            className="w-4 h-4 border-2 rounded-full animate-spin"
+            style={{ borderColor: 'var(--c-ok)', borderTopColor: 'transparent' }}
+            aria-hidden="true"
+          />
         ) : (
-          <>
-            <Send size={18} />
-            Send Message
-          </>
+          <>send message →</>
         )}
-      </motion.button>
-    </motion.form>
+      </button>
+    </form>
   );
 };

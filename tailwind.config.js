@@ -1,70 +1,45 @@
 /** @type {import('tailwindcss').Config} */
+// Design system: "The Instrument" — see design-system/MASTER.md (global source of truth).
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+        field: 'var(--c-field)',
+        panel: 'var(--c-panel)',
+        'panel-2': 'var(--c-panel-2)',
+        edge: {
+          DEFAULT: 'var(--c-edge)',
+          hi: 'var(--c-edge-hi)',
         },
-        neutral: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-          950: '#0a0a0a',
-        }
+        ink: {
+          DEFAULT: 'var(--c-text)',
+          dim: 'var(--c-text-dim)',
+          faint: 'var(--c-text-faint)',
+        },
+        amber: {
+          DEFAULT: 'var(--c-amber)',
+          on: 'var(--c-on-amber)',
+        },
+        ok: 'var(--c-ok)',
+        alert: 'var(--c-alert)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.6s ease-out',
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-in-right': 'slideInRight 0.6s ease-out',
+      borderRadius: {
+        sm: '3px',
+        DEFAULT: '6px',
+        md: '8px',
       },
-      keyframes: {
-        fadeInUp: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(30px)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0)',
-          },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideInRight: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(30px)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0)',
-          },
-        },
+      boxShadow: {
+        panel: 'var(--shadow-panel)',
+        led: '0 0 7px var(--c-ok)',
+      },
+      maxWidth: {
+        site: '1240px',
       },
     },
   },

@@ -6,24 +6,21 @@ interface SkillBadgeProps {
   index: number;
 }
 
+/**
+ * Chip (MASTER.md §7): mono, square-ish — rounded-full pill badges are
+ * banned by the anti-pattern register (§8.7).
+ */
 export const SkillBadge = ({ skill, level, index }: SkillBadgeProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ scale: 1.05 }}
-      className="bg-white dark:bg-neutral-800 px-4 py-2 rounded-full shadow-md border border-neutral-200 dark:border-neutral-700 hover:shadow-lg hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+    <motion.span
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.3, delay: Math.min(index * 0.03, 0.15), ease: 'easeOut' }}
+      className="chip hover:border-edge-hi hover:text-ink transition-colors duration-200"
     >
-      <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-        {skill}
-        {level && (
-          <span className="ml-2 text-primary-600 dark:text-primary-400 font-semibold">
-            {level}%
-          </span>
-        )}
-      </span>
-    </motion.div>
+      {skill.toLowerCase()}
+      {level ? <span className="ml-2 text-amber tabular">{level}%</span> : null}
+    </motion.span>
   );
 };
